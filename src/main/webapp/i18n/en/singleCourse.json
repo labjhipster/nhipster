@@ -1,0 +1,30 @@
+{
+  "nhipsterApp": {
+    "singleCourse": {
+      "home": {
+        "title": "Single Courses",
+        "createLabel": "Create a new Single Course",
+        "createOrEditLabel": "Create or edit a Single Course",
+        "notFound": "No Single Courses found"
+      },
+      "created": "A new Single Course is created with identifier {{ param }}",
+      "updated": "A Single Course is updated with identifier {{ param }}",
+      "deleted": "A Single Course is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Single Course {{ id }}?"
+      },
+      "detail": {
+        "title": "Single Course"
+      },
+      "title": "Title",
+      "description": "Description",
+      "isnotonlyfordegree": "Isnotonlyfordegree",
+      "cfu": "Cfu",
+      "courseimage": "Courseimage",
+      "amount": "Amount",
+      "activity": "Activity",
+      "cfteacher": "Cfteacher",
+      "cfstudent": "Cfstudent"
+    }
+  }
+}

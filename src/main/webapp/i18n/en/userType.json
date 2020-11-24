@@ -1,0 +1,9 @@
+{
+  "nhipsterApp": {
+    "UserType": {
+      "null": "",
+      "STUDENT": "STUDENT",
+      "TEACHER": "TEACHER"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+    "name": "DemetraUser",
+    "fields": [
+        {
+            "fieldName": "gender",
+            "fieldType": "Gender",
+            "fieldValues": "MALE,FEMALE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "borndate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "usertype",
+            "fieldType": "UserType",
+            "fieldValues": "STUDENT,TEACHER",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "profileimage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "singleCourse",
+            "otherEntityRelationshipName": "cfteacher",
+            "relationshipName": "singlecourseteacher"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "singleCourse",
+            "otherEntityRelationshipName": "cfstudent",
+            "relationshipName": "coursetitle",
+            "otherEntityField": "title",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20201124070600",
+    "entityTableName": "demetra_user",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

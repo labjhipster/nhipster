@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="nhipsterApp.demetraUser.home.title">Demetra Users</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-demetra-user" [routerLink]="['/demetra-user/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="nhipsterApp.demetraUser.home.createLabel">
+            Create a new Demetra User
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="demetraUsers?.length === 0">
+        <span jhiTranslate="nhipsterApp.demetraUser.home.notFound">No demetraUsers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="demetraUsers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.gender">Gender</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.address">Address</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.borndate">Borndate</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.cf">Cf</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.usertype">Usertype</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.profileimage">Profileimage</span></th>
+                    <th scope="col" ><span jhiTranslate="nhipsterApp.demetraUser.coursetitle">Coursetitle</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let demetraUser of demetraUsers ;trackBy: trackId">
+                    <td><a [routerLink]="['/demetra-user', demetraUser.id, 'view']">{{ demetraUser.id }}</a></td>
+                    <td jhiTranslate="{{ 'nhipsterApp.Gender.' + demetraUser.gender }}">{{ demetraUser.gender }}</td>
+                    <td>{{ demetraUser.address }}</td>
+                    <td>{{ demetraUser.borndate | date:'mediumDate' }}</td>
+                    <td>{{ demetraUser.cf }}</td>
+                    <td jhiTranslate="{{ 'nhipsterApp.UserType.' + demetraUser.usertype }}">{{ demetraUser.usertype }}</td>
+                    <td>
+                        <a *ngIf="demetraUser.profileimage" (click)="openFile(demetraUser.profileimageContentType, demetraUser.profileimage)">
+                            <img [src]="'data:' + demetraUser.profileimageContentType + ';base64,' + demetraUser.profileimage" style="max-height: 30px;" alt="demetraUser image"/>
+                        </a>
+                        <span *ngIf="demetraUser.profileimage">{{ demetraUser.profileimageContentType }}, {{ byteSize(demetraUser.profileimage) }}</span>
+                    </td>
+                    <td>
+                        <span *ngFor="let coursetitle of demetraUser.coursetitles; let last = last">
+                            <a class="form-control-static" [routerLink]="['/single-course', coursetitle?.id, 'view']">{{ coursetitle.title }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/demetra-user', demetraUser.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/demetra-user', demetraUser.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(demetraUser)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
