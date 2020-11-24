@@ -1,0 +1,73 @@
+{
+    "name": "SingleCourse",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isnotonlyfordegree",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cfu",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "courseimage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "activity",
+            "otherEntityRelationshipName": "singleCourse",
+            "relationshipName": "activity",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "demetraUser",
+            "otherEntityRelationshipName": "singlecourseteacher",
+            "relationshipValidateRules": "required",
+            "relationshipName": "cfteacher",
+            "otherEntityField": "cf"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "demetraUser",
+            "otherEntityRelationshipName": "coursetitle",
+            "relationshipName": "cfstudent",
+            "otherEntityField": "cf",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20201124070700",
+    "entityTableName": "single_course",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

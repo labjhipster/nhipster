@@ -1,0 +1,52 @@
+{
+    "name": "Activity",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "UUID",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mynumber",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "creationtime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "singleCourse",
+            "otherEntityRelationshipName": "activity",
+            "relationshipName": "singleCourse",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "demetraUser",
+            "otherEntityRelationshipName": "activity",
+            "relationshipName": "demetrauser",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20201124070800",
+    "entityTableName": "activity",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

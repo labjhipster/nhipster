@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="singleCourse">
+            <h2><span jhiTranslate="nhipsterApp.singleCourse.detail.title">Single Course</span> {{ singleCourse.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.title">Title</span></dt>
+                <dd>
+                    <span>{{ singleCourse.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.description">Description</span></dt>
+                <dd>
+                    <span>{{ singleCourse.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.isnotonlyfordegree">Isnotonlyfordegree</span></dt>
+                <dd>
+                    <span>{{ singleCourse.isnotonlyfordegree }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.cfu">Cfu</span></dt>
+                <dd>
+                    <span>{{ singleCourse.cfu }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.courseimage">Courseimage</span></dt>
+                <dd>
+                    <div *ngIf="singleCourse.courseimage">
+                        <a (click)="openFile(singleCourse?.courseimageContentType!, singleCourse?.courseimage)" jhiTranslate="entity.action.open">open</a>
+                        {{ singleCourse.courseimageContentType }}, {{ byteSize(singleCourse.courseimage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ singleCourse.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.singleCourse.cfteacher">Cfteacher</span></dt>
+                <dd>
+                    <div *ngIf="singleCourse.cfteacher">
+                        <a [routerLink]="['/demetra-user', singleCourse.cfteacher?.id, 'view']">{{ singleCourse.cfteacher?.cf }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/single-course', singleCourse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

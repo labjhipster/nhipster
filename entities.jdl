@@ -1,0 +1,66 @@
+enum Gender {
+MALE,
+FEMALE
+}
+
+enum UserType {
+STUDENT,
+TEACHER
+}
+
+
+entity DemetraUser {
+	gender Gender required,
+	address String required,
+	borndate LocalDate required,
+	cf String required unique,
+	usertype UserType required,
+	profileimage ImageBlob
+}
+
+entity SingleCourse {
+	title String required unique,
+	description String,
+	isnotonlyfordegree Boolean required,
+	cfu Integer,
+	courseimage Blob,
+	amount BigDecimal
+}
+
+entity Activity {
+	name UUID unique,
+	description String,
+	mynumber Double,
+	creationtime ZonedDateTime
+
+}
+
+relationship OneToOne {
+	Activity to SingleCourse
+}
+
+relationship ManyToOne {
+	Activity {demetrauser} to DemetraUser
+}
+
+relationship ManyToMany {
+
+	DemetraUser {
+		coursetitle(title)
+	}
+	to SingleCourse {
+		cfstudent(cf)
+	},
+}
+
+
+relationship OneToMany {
+
+	DemetraUser {
+		singlecourseteacher
+	}
+	to SingleCourse {
+		cfteacher(cf)required
+	}
+
+}

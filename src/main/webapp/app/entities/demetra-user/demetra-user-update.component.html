@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-demetra-user-heading" jhiTranslate="nhipsterApp.demetraUser.home.createOrEditLabel">Create or edit a Demetra User</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.gender" for="field_gender">Gender</label>
+                    <select class="form-control" name="gender" formControlName="gender" id="field_gender">
+                        <option value="MALE">{{ 'nhipsterApp.Gender.MALE' | translate }}</option>
+                        <option value="FEMALE">{{ 'nhipsterApp.Gender.FEMALE' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('gender')!.invalid && (editForm.get('gender')!.dirty || editForm.get('gender')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('gender')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                           formControlName="address"/>
+                    <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('address')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.borndate" for="field_borndate">Borndate</label>
+                    <div class="input-group">
+                        <input id="field_borndate" type="text" class="form-control" name="borndate" ngbDatepicker #borndateDp="ngbDatepicker" formControlName="borndate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="borndateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('borndate')!.invalid && (editForm.get('borndate')!.dirty || editForm.get('borndate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('borndate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.cf" for="field_cf">Cf</label>
+                    <input type="text" class="form-control" name="cf" id="field_cf"
+                           formControlName="cf"/>
+                    <div *ngIf="editForm.get('cf')!.invalid && (editForm.get('cf')!.dirty || editForm.get('cf')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cf')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.usertype" for="field_usertype">Usertype</label>
+                    <select class="form-control" name="usertype" formControlName="usertype" id="field_usertype">
+                        <option value="STUDENT">{{ 'nhipsterApp.UserType.STUDENT' | translate }}</option>
+                        <option value="TEACHER">{{ 'nhipsterApp.UserType.TEACHER' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('usertype')!.invalid && (editForm.get('usertype')!.dirty || editForm.get('usertype')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('usertype')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="nhipsterApp.demetraUser.profileimage" for="field_profileimage">Profileimage</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('profileimageContentType')!.value + ';base64,' + editForm.get('profileimage')!.value" style="max-height: 100px;" *ngIf="editForm.get('profileimage')!.value" alt="demetraUser image"/>
+                        <div *ngIf="editForm.get('profileimage')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('profileimageContentType')!.value }}, {{ byteSize(editForm.get('profileimage')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('profileimage', 'profileimageContentType', 'file_profileimage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_profileimage" (change)="setFileData($event, 'profileimage', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="profileimage" id="field_profileimage"
+                           formControlName="profileimage"/>
+                    <input type="hidden" class="form-control" name="profileimageContentType" id="field_profileimageContentType"
+                           formControlName="profileimageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="nhipsterApp.demetraUser.coursetitle" for="field_coursetitles">Coursetitle</label>
+                    <select class="form-control" id="field_coursetitles" multiple name="coursetitles" formControlName="coursetitles">
+                        <option [ngValue]="getSelected(editForm.get('coursetitles')!.value, singleCourseOption)" *ngFor="let singleCourseOption of singlecourses; trackBy: trackById">{{ singleCourseOption.title }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

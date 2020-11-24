@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="demetraUser">
+            <h2><span jhiTranslate="nhipsterApp.demetraUser.detail.title">Demetra User</span> {{ demetraUser.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.gender">Gender</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'nhipsterApp.Gender.' + demetraUser.gender }}">{{ demetraUser.gender }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.address">Address</span></dt>
+                <dd>
+                    <span>{{ demetraUser.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.borndate">Borndate</span></dt>
+                <dd>
+                    <span>{{ demetraUser.borndate }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.cf">Cf</span></dt>
+                <dd>
+                    <span>{{ demetraUser.cf }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.usertype">Usertype</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'nhipsterApp.UserType.' + demetraUser.usertype }}">{{ demetraUser.usertype }}</span>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.profileimage">Profileimage</span></dt>
+                <dd>
+                    <div *ngIf="demetraUser.profileimage">
+                        <a (click)="openFile(demetraUser?.profileimageContentType!, demetraUser?.profileimage)">
+                            <img [src]="'data:' + demetraUser.profileimageContentType + ';base64,' + demetraUser.profileimage" style="max-width: 100%;" alt="demetraUser image"/>
+                        </a>
+                        {{ demetraUser.profileimageContentType }}, {{ byteSize(demetraUser.profileimage) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="nhipsterApp.demetraUser.coursetitle">Coursetitle</span></dt>
+                <dd>
+                    <span *ngFor="let coursetitle of demetraUser.coursetitles; let last = last">
+                        <a [routerLink]="['/single-course', coursetitle?.id, 'view']">{{ coursetitle.title }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/demetra-user', demetraUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
